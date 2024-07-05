@@ -1,0 +1,100 @@
+﻿@model AirlineManagementSystem.Models.MyModel
+@{
+    ViewBag.Title = "ViewReservation";
+    Layout = "~/Views/Shared/MyAdminMaster.cshtml";
+    string status = string.Empty;
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card border-danger">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title text-danger">Reservation Detail</h4>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div>
+                    <div class="row">
+                        @Html.HiddenFor(Model => Model.MyReservation.ReservationID)
+                        <div class="col-md-12">
+                            <h4><span class="text-danger">Passenger Data</span></h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>First Name *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyReservation.FirstName)</span>
+                                    <br />
+                                    <label>Last Name *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyReservation.LastName)</span>
+                                    <br />
+                                    <label>Email *</label>
+                                    <a href="mailto:" class="text-blue">@Html.DisplayFor(x => x.MyReservation.Email)</a>
+                                    <br />
+                                    <label>CNIC *</label>
+                                    <span class="text-blue">@Html.DisplayFor(x => x.MyReservation.CNIC)</span>
+                                    <br />
+                                    <label>Passport *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyReservation.PassportNo)</span>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Nationality*</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyReservation.Nationality)</span>
+                                    <br />
+                                    <label>Cabin *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyCabin.Name)</span>
+                                    <br />
+                                    <label>Contact *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyReservation.Phoneno)</span>
+                                    <br />
+                                    <label>Schedule *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.Cityfrom.CityName) (@Html.DisplayFor(x => x.Countryfrom.CountryName)) To @Html.DisplayFor(x => x.Cityto.CityName) (@Html.DisplayFor(x => x.Countryto.CountryName))</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Reservation Code *</label>
+                                    <span class="text-green">@Html.DisplayFor(x => x.MyReservation.ReservationCode)</span>
+                                    <br />
+
+                                    <label>Status *</label>
+                                    @if (Model.MyReservation.Status == 0)
+                                    {
+                                        <h5><span class="col-green">In-Process</span></h5>
+
+                                    }
+                                    else if (Model.MyReservation.Status == 1)
+                                    {
+                                        <h5><span class="col-green">Booked</span></h5>
+                                    }
+                                    else if (Model.MyReservation.Status == 2)
+                                    {
+                                        <h5><span class="col-orange">Completed</span></h5>
+                                    }
+                                    else
+                                    {
+                                        <h5><span class="col-red">Rejected</span></h5>
+                                    }
+                                    <span class="text-green">@status</span>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            @Html.ActionLink("In-Process", "CheckStatus", new { appID = Model.MyReservation.ReservationID, status = 0 }, new { @class = "btn btn-primary col-md-2" })
+                            @Html.ActionLink("Booked", "CheckStatus", new { appID = Model.MyReservation.ReservationID, status = 1 }, new { @class = "btn btn-success col-md-2" })
+                            @Html.ActionLink("Completed", "CheckStatus", new { appID = Model.MyReservation.ReservationID, status = 2 }, new { @class = "btn btn-warning col-md-2" })
+                            @Html.ActionLink("Rejected", "CheckStatus", new { appID = Model.MyReservation.ReservationID, status = 3 }, new { @class = "btn btn-danger col-md-2" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

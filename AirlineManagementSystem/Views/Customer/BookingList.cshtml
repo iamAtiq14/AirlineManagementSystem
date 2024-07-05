@@ -1,0 +1,209 @@
+﻿
+
+@{ ViewBag.Title = "Schedule";
+    Layout = "~/Views/Shared/MyTravelMaster.cshtml";
+    string status = ""; }
+
+<main>
+
+    <!-- breadcrumb-area -->
+    <section class="slider-area">
+        <div class="slider-active">
+            <div class="single-slider slider-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-10">
+                            <div class="slider-content">
+                                <h2 class="title" data-animation="fadeInUp" data-delay=".2s">Booking List</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="@Url.Action("Customer","Customer")">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Booking List</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+    <!-- booking-area -->
+
+    <div class="booking-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="booking-tag">
+                        <ul>
+                            <li><a href="booking-list.html"><i class="flaticon-flight"></i>Flights</a></li>
+                            <!--           <li><a href="booking-list.html"><i class="flaticon-car-1"></i>Car Rentals</a></li>		-->
+                            <!--           <li><a href="booking-list.html"><i class="flaticon-eiffel-tower"></i>Attractions</a></li>	-->
+                            <!--           <li><a href="booking-list.html"><i class="flaticon-taxi"></i>Airport Taxis</a></li>		-->
+                        </ul>
+                    </div>
+                    <div class="booking-wrap">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="bOOKing-tab" data-bs-toggle="tab" data-bs-target="#bOOKing-tab-pane" type="button"
+                                        role="tab" aria-controls="bOOKing-tab-pane" aria-selected="true">
+                                    <i class="flaticon-flight"></i>air BOOKing
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                               
+                            <a href="@Url.Action("Index","Reservation")" class="nav-link" type="button">
+                            My Trips
+                            </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a href="@Url.Action("Index","Reservation")" class="nav-link" type="button">
+                                    Check In
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a href="@Url.Action("FlightStatus","Customer")" class="nav-link" type="button">
+                                    Flight status
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="bOOKing-tab-pane" role="tabpanel" aria-labelledby="bOOKing-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="tab-content-wrap">
+                                            <div class="content-top">
+                                                <ul>
+                                                    <li>Flights</li>
+                                                </ul>
+                                            </div>
+                                            <div class="booking-form">
+                                                <div class="row form-grp">
+                                                    <div class="col-md-6">
+                                                        <label for="shortBy">From</label>
+                                                        <div class="form-floating form-group" id="ddlFromData"
+                                                             onchange="LoadToData(); validdateDropDowns('#ddlFromData', '#msgfrom', 'From Data')"
+                                                             @*onchange="validdateDropDowns('#ddlFromData', '#msgcouf', 'Country From')"*@></div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="shortBy">To</label>
+                                                        <div class="form-floating form-group" id="ddlToData"
+                                                             @*onchange="validdateDropDowns('#ddlToData', '#msgcouf', 'Country To')"*@></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="content-bottom pull-right">
+                                                    <button type="button" onclick="Searchflights();" class="btn">Show Flights <i class="flaticon-flight-1"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- booking-area-end -->
+    <!-- booking-list-area -->
+    <div class="booking-list-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-27 order-2 order-xl-0">
+                    <aside class="booking-sidebar">
+                        <div class="widget filters">
+                            <h2 class="title">filters</h2>
+                            <div class="filters-wrap">
+                                <h2 class="widget-title">Price Range</h2>
+                                <div class="price_filter">
+                                    <div id="slider-range"></div>
+                                    <div class="price_slider_amount">
+                                        <span>Price :</span>
+                                        <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                                        <input type="submit" class="btn" value="Filter">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="widget">
+                                <h2 class="widget-title">Departure Time</h2>
+                                <ul class="departure-wrap">
+                                    <li><a href="#"><i class="flaticon-sunrise"></i>00:00 - 05:59</a></li>
+                                    <li><a href="#"><i class="flaticon-sunny"></i>06:00 - 11:59</a></li>
+                                    <li><a href="#"><i class="flaticon-sunset"></i>12:00 - 17:59</a></li>
+                                    <li><a href="#"><i class="flaticon-crescent-moon"></i>18:00 - 23:59</a></li>
+                                </ul>
+                            </div>*@
+                        <div class="widget">
+                            <h2 class="widget-title">Number of Stops</h2>
+                            <form action="#" class="flight-stops">
+                                <label for="stopNumber"><i class="flaticon-flight"></i></label>
+                                <span value="">Direct | Non-Stop</span>
+                            </form>
+                        </div>
+                        <div class="widget">
+                            <h2 class="widget-title">Airlines</h2>
+                            <ul class="airlines-cat-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="catOne">EthiHad</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="catTwo">Lankan Airlines</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="catThree">Dubai Airway</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="catFour">NOVOAIR</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widget">
+                            <h2 class="widget-title">Free Weights</h2>
+                            <ul class="airlines-cat-list weights-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="weightsOne">25 KG</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="widget">
+                            <h2 class="widget-title">Refundable</h2>
+                            <ul class="airlines-cat-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="refThree">Rules Wise</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-73">
+                    <div id="mydataa"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- booking-list-area-end -->
+
+</main>
+<!-- main-area-end -->
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<link href="~/AMSJS/iziToast.css" rel="stylesheet" />
+<script src="~/AMSJS/iziToast.js"></script>
+@*<script type="text/javascript" src="~/AMSJS/Schedule.js"></script>*@
+<script type="text/javascript" src="~/AMSJS/BookingList.js"></script>

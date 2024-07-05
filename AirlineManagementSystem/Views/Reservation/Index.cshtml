@@ -1,0 +1,562 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyTravelMaster.cshtml";
+}
+
+<!-- breadcrumb-area -->
+<section class="breadcrumb-area breadcrumb-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="title">Check Booking Details</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Customer","Customer")">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Check Booking Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb-area-end -->
+<!-- booking-details-area -->
+<section class="booking-details-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="primary-contact">
+                            <i class="fa-regular fa-user"></i>
+                            <h2 class="title">Check Reservation(s)</h2>
+                        </div>
+                        <div class="row booking-details-wrap">
+                            <div class="col-md-6">
+                                <input type="text" onchange="validdate('#txtReservationCode', '#res', 'Reservation Code')" id="txtReservationCode" class="form-control" />
+                                <span class="text-danger" id="res"></span>
+                                @*<p>Please enter Reservation Code</p>*@
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-raised btn-primary waves-effect"
+                                        id="btnSubmit" onclick="checkReservation();">
+                                    <b class="fa fa-search"> Search</b>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mydata">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- booking-details-area-end -->
+
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<link href="~/AMSJS/iziToast.css" rel="stylesheet" />
+<script src="~/AMSJS/iziToast.js"></script>
+<script type="text/javascript">
+    var isresValid = false;
+    function validdate(txt, msg, data) {
+
+        if ($(txt).val() == "") {
+            var mymsg = data + ' is required';
+            $(txt).css("border-color", "red");
+            $(msg).html(mymsg);
+            $('#btnSubmit').css("Enabled", "false");
+            return false;
+        }
+        else {
+            $(txt).css("border-color", "green");
+            $(msg).html("");
+            $('#btnSubmit').css("Enabled", "true");
+            return true;
+        }
+    }
+    function validData() {
+        isresValid = validdate('#txtReservationCode', '#res', 'Reservation Code');
+    }
+    function checkReservation() {
+        debugger;
+        validData();
+        if (isresValid == true) {
+            $.ajax({
+                type: 'POST',
+                url: "https://localhost:44371/Reservation/Index?reservationCode=" + $('#txtReservationCode').val(),
+                success: function (data) {
+                    debugger;
+                    var html = '';
+
+                    for (var i = 0; i < data.length; i++) {
+                        var obj1 = '{ "mydate":' + data[i].MySchedule.DepartureDate.slice(6, 19) + ' }';
+                        var depDate = new Date(JSON.parse(obj1).mydate).toDateString();
+                        var obj2 = '{ "myDeptime":' + data[i].MySchedule.DepartureTime.slice(6, 19) + ' }';
+                        var deptime = new Date(JSON.parse(obj2).myDeptime).toLocaleTimeString();
+                        var obj3 = '{ "myArrtime":' + data[i].MySchedule.ArrivalTime.slice(6, 19) + ' }';
+                        var arrtime = new Date(JSON.parse(obj3).myArrtime).toLocaleTimeString();
+                        var nationality = '';
+                        if (data[i].MyReservation.Nationality == 1) {
+                            nationality = '<span>Afghanistan</span>';
+                        }
+                        else if (data[i].MyReservation.Nationality == 2) {
+                            nationality = '<span>Albania</span>';
+                        }
+                        //else if (data[i].MyReservation.Nationality == 3) {
+                        //    nationality = '<span>Pakistan</span>';
+                        //}
+                        else if (data[i].MyReservation.Nationality == 4) {
+                            nationality = '<span>Algeria</span>';
+                        }else if (data[i].MyReservation.Nationality == 5) {
+                            nationality = '<span>Andorra</span>';
+                        }else if (data[i].MyReservation.Nationality == 6) {
+                            nationality = '<span>Angola</span>';
+                        }else if (data[i].MyReservation.Nationality == 7) {
+                            nationality = '<span>Argentina</span>';
+                        }else if (data[i].MyReservation.Nationality == 8) {
+                            nationality = '<span>Armenia</span>';
+                        }else if (data[i].MyReservation.Nationality == 9) {
+                            nationality = '<span>Australia</span>';
+                        }else if (data[i].MyReservation.Nationality == 10) {
+                            nationality = '<span>Austria</span>';
+                        }else if (data[i].MyReservation.Nationality == 11) {
+                            nationality = '<span>Azerbaijan</span>';
+                        }else if (data[i].MyReservation.Nationality == 12) {
+                            nationality = '<span>Bahamas</span>';
+                        }else if (data[i].MyReservation.Nationality == 13) {
+                            nationality = '<span>Bahrain</span>';
+                        }else if (data[i].MyReservation.Nationality == 14) {
+                            nationality = '<span>Bangladesh</span>';
+                        }else if (data[i].MyReservation.Nationality == 15) {
+                            nationality = '<span>Barbados</span>';
+                        }else if (data[i].MyReservation.Nationality == 16) {
+                            nationality = '<span>Belarus</span>';
+                        }else if (data[i].MyReservation.Nationality == 17) {
+                            nationality = '<span>Belgium</span>';
+                        }else if (data[i].MyReservation.Nationality == 18) {
+                            nationality = '<span>Belize</span>';
+                        }else if (data[i].MyReservation.Nationality == 19) {
+                            nationality = '<span>Benin</span>';
+                        }else if (data[i].MyReservation.Nationality == 20) {
+                            nationality = '<span>Bhutan</span>';
+                        }else if (data[i].MyReservation.Nationality == 21) {
+                            nationality = '<span>Bolivia</span>';
+                        }else if (data[i].MyReservation.Nationality == 22) {
+                            nationality = '<span>Bosnia</span>';
+                        }else if (data[i].MyReservation.Nationality == 23) {
+                            nationality = '<span>Botswana</span>';
+                        }else if (data[i].MyReservation.Nationality == 24) {
+                            nationality = '<span>Brazil</span>';
+                        }else if (data[i].MyReservation.Nationality == 25) {
+                            nationality = '<span>Brunei</span>';
+                        }else if (data[i].MyReservation.Nationality == 26) {
+                            nationality = '<span>Bulgaria</span>';
+                        }else if (data[i].MyReservation.Nationality == 27) {
+                            nationality = '<span>Burkina</span>';
+                        }else if (data[i].MyReservation.Nationality == 28) {
+                            nationality = '<span>Burundi</span>';
+                        }else if (data[i].MyReservation.Nationality == 29) {
+                            nationality = '<span>Côte d Ivoire </span>';
+                        }else if (data[i].MyReservation.Nationality == 30) {
+                            nationality = '<span>Cabo Verde</span>';
+                        }else if (data[i].MyReservation.Nationality == 31) {
+                            nationality = '<span>Cambodia</span>';
+                        }else if (data[i].MyReservation.Nationality == 32) {
+                            nationality = '<span>Cameroon</span>';
+                        }else if (data[i].MyReservation.Nationality == 33) {
+                            nationality = '<span>Canada</span>';
+                        }else if (data[i].MyReservation.Nationality == 34) {
+                            nationality = '<span>Central African Republic</span>';
+                        }else if (data[i].MyReservation.Nationality == 35) {
+                            nationality = '<span>Chad</span>';
+                        }else if (data[i].MyReservation.Nationality == 36) {
+                            nationality = '<span>Chile</span>';
+                        }else if (data[i].MyReservation.Nationality == 37) {
+                            nationality = '<span>China</span>';
+                        }else if (data[i].MyReservation.Nationality == 38) {
+                            nationality = '<span>Colombia</span>';
+                        }else if (data[i].MyReservation.Nationality == 39) {
+                            nationality = '<span>Comoros</span>';
+                        }else if (data[i].MyReservation.Nationality == 40) {
+                            nationality = '<span>Congo</span>';
+                        }else if (data[i].MyReservation.Nationality == 41) {
+                            nationality = '<span>Costa Rica</span>';
+                        }else if (data[i].MyReservation.Nationality == 42) {
+                            nationality = '<span>Croatia</span>';
+                        }else if (data[i].MyReservation.Nationality == 43) {
+                            nationality = '<span>Cuba</span>';
+                        }else if (data[i].MyReservation.Nationality == 44) {
+                            nationality = '<span>Cyprus</span>';
+                        }else if (data[i].MyReservation.Nationality == 45) {
+                            nationality = '<span>Czechia (Czech Republic)</span>';
+                        }else if (data[i].MyReservation.Nationality == 46) {
+                            nationality = '<span>Democratic Republic of the Congo</span>';
+                        }else if (data[i].MyReservation.Nationality == 47) {
+                            nationality = '<span>Denmark</span>';
+                        }else if (data[i].MyReservation.Nationality == 48) {
+                            nationality = '<span>Dominican Republic</span>';
+                        }else if (data[i].MyReservation.Nationality == 49) {
+                            nationality = '<span>Ecuador</span>';
+                        }else if (data[i].MyReservation.Nationality == 50) {
+                            nationality = '<span>Egypt</span>';
+                        }else if (data[i].MyReservation.Nationality == 51) {
+                            nationality = '<span>El Salvador</span>';
+                        }else if (data[i].MyReservation.Nationality == 52) {
+                            nationality = '<span>Equatorial Guinea</span>';
+                        }else if (data[i].MyReservation.Nationality == 53) {
+                            nationality = '<span>Eritrea</span>';
+                        }else if (data[i].MyReservation.Nationality == 54) {
+                            nationality = '<span>Estonia</span>';
+                        }else if (data[i].MyReservation.Nationality == 55) {
+                            nationality = '<span>Eswatini</span>';
+                        }else if (data[i].MyReservation.Nationality == 56) {
+                            nationality = '<span>Ethiopia</span>';
+                        }else if (data[i].MyReservation.Nationality == 57) {
+                            nationality = '<span>Fiji</span>';
+                        }else if (data[i].MyReservation.Nationality == 58) {
+                            nationality = '<span>Finland</span>';
+                        }else if (data[i].MyReservation.Nationality == 59) {
+                            nationality = '<span>France</span>';
+                        }else if (data[i].MyReservation.Nationality == 60) {
+                            nationality = '<span>Gabon</span>';
+                        }else if (data[i].MyReservation.Nationality == 61) {
+                            nationality = '<span>Gambia</span>';
+                        }else if (data[i].MyReservation.Nationality == 62) {
+                            nationality = '<span>Georgia</span>';
+                        }else if (data[i].MyReservation.Nationality == 63) {
+                            nationality = '<span>Germany</span>';
+                        }else if (data[i].MyReservation.Nationality == 64) {
+                            nationality = '<span>Ghana</span>';
+                        }else if (data[i].MyReservation.Nationality == 65) {
+                            nationality = '<span>Greece</span>';
+                        }else if (data[i].MyReservation.Nationality == 66) {
+                            nationality = '<span>Grenada</span>';
+                        }else if (data[i].MyReservation.Nationality == 67) {
+                            nationality = '<span>Guatemala</span>';
+                        }else if (data[i].MyReservation.Nationality == 68) {
+                            nationality = '<span>Guinea-Bissau</span>';
+                        }else if (data[i].MyReservation.Nationality == 69) {
+                            nationality = '<span>Guyana</span>';
+                        }else if (data[i].MyReservation.Nationality == 70) {
+                            nationality = '<span>Haiti</span>';
+                        }else if (data[i].MyReservation.Nationality == 71) {
+                            nationality = '<span>Holy See</span>';
+                        }else if (data[i].MyReservation.Nationality == 72) {
+                            nationality = '<span>Honduras</span>';
+                        }else if (data[i].MyReservation.Nationality == 73) {
+                            nationality = '<span>Hungary</span>';
+                        }else if (data[i].MyReservation.Nationality == 74) {
+                            nationality = '<span>Iceland</span>';
+                        }else if (data[i].MyReservation.Nationality == 75) {
+                            nationality = '<span>India</span>';
+                        }else if (data[i].MyReservation.Nationality == 76) {
+                            nationality = '<span>Indonesia</span>';
+                        }else if (data[i].MyReservation.Nationality == 78) {
+                            nationality = '<span>Iran</span>';
+                        }else if (data[i].MyReservation.Nationality == 79) {
+                            nationality = '<span>Iraq</span>';
+                        }else if (data[i].MyReservation.Nationality == 80) {
+                            nationality = '<span>Ireland</span>';
+                        }else if (data[i].MyReservation.Nationality == 81) {
+                            nationality = '<span>Israel</span>';
+                        }else if (data[i].MyReservation.Nationality == 82) {
+                            nationality = '<span>Italy</span>';
+                        }else if (data[i].MyReservation.Nationality == 83) {
+                            nationality = '<span>Jamaica</span>';
+                        }else if (data[i].MyReservation.Nationality == 84) {
+                            nationality = '<span>Japan</span>';
+                        }else if (data[i].MyReservation.Nationality == 85) {
+                            nationality = '<span>Jordan</span>';
+                        }else if (data[i].MyReservation.Nationality == 86) {
+                            nationality = '<span>Kazakhstan</span>';
+                        }else if (data[i].MyReservation.Nationality == 87) {
+                            nationality = '<span>Kenya</span>';
+                        }else if (data[i].MyReservation.Nationality == 88) {
+                            nationality = '<span>Kiribati</span>';
+                        }else if (data[i].MyReservation.Nationality == 89) {
+                            nationality = '<span>Kuwait</span>';
+                        }else if (data[i].MyReservation.Nationality == 90) {
+                            nationality = '<span>Kyrgyzstan</span>';
+                        }else if (data[i].MyReservation.Nationality == 91) {
+                            nationality = '<span>Laos</span>';
+                        }else if (data[i].MyReservation.Nationality == 92) {
+                            nationality = '<span>Latvia</span>';
+                        }else if (data[i].MyReservation.Nationality == 93) {
+                            nationality = '<span>Lebanon</span>';
+                        }else if (data[i].MyReservation.Nationality == 94) {
+                            nationality = '<span>Lesotho</span>';
+                        }else if (data[i].MyReservation.Nationality == 95) {
+                            nationality = '<span>Liberia</span>';
+                        }else if (data[i].MyReservation.Nationality == 96) {
+                            nationality = '<span>Libya</span>';
+                        }
+                        if (data[i].MyReservation.Nationality.Nationality == 97) {
+                            nationality = '<span>Liechtenstein</span>';
+                        }
+                        else if (data[i].MyReservation.Nationality == 98) {
+                            nationality = '<span>Lithuania</span>';
+                        }
+                        else if (data[i].MyReservation.Nationality == 99) {
+                            nationality = '<span>Luxembourg</span>';
+                        }else if (data[i].MyReservation.Nationality == 100) {
+                            nationality = '<span>Madagascar</span>';
+                        }else if (data[i].MyReservation.Nationality == 101) {
+                            nationality = '<span>Malawi</span>';
+                        }else if (data[i].MyReservation.Nationality == 102) {
+                            nationality = '<span>Malaysia</span>';
+                        }else if (data[i].MyReservation.Nationality == 103) {
+                            nationality = '<span>Maldives</span>';
+                        }else if (data[i].MyReservation.Nationality == 104) {
+                            nationality = '<span>Mali</span>';
+                        }else if (data[i].MyReservation.Nationality == 105) {
+                            nationality = '<span>Malta</span>';
+                        }else if (data[i].MyReservation.Nationality == 106) {
+                            nationality = '<span>Marshall Islands</span>';
+                        }else if (data[i].MyReservation.Nationality == 107) {
+                            nationality = '<span>Mauritania</span>';
+                        }else if (data[i].MyReservation.Nationality == 108) {
+                            nationality = '<span>Mauritius</span>';
+                        }else if (data[i].MyReservation.Nationality == 109) {
+                            nationality = '<span>Mexico</span>';
+                        }else if (data[i].MyReservation.Nationality == 110) {
+                            nationality = '<span>Micronesia</span>';
+                        }else if (data[i].MyReservation.Nationality == 111) {
+                            nationality = '<span>Moldova</span>';
+                        }else if (data[i].MyReservation.Nationality == 112) {
+                            nationality = '<span>Monaco</span>';
+                        }else if (data[i].MyReservation.Nationality == 113) {
+                            nationality = '<span>Mongolia</span>';
+                        }else if (data[i].MyReservation.Nationality == 114) {
+                            nationality = '<span>Montenegro</span>';
+                        }else if (data[i].MyReservation.Nationality == 115) {
+                            nationality = '<span>Morocco</span>';
+                        }else if (data[i].MyReservation.Nationality == 116) {
+                            nationality = '<span>Mozambique</span>';
+                        }else if (data[i].MyReservation.Nationality == 117) {
+                            nationality = '<span>Myanmar (formerly Burma)</span>';
+                        }else if (data[i].MyReservation.Nationality == 118) {
+                            nationality = '<span>Namibia</span>';
+                        }else if (data[i].MyReservation.Nationality == 119) {
+                            nationality = '<span>Nauru</span>';
+                        }else if (data[i].MyReservation.Nationality == 120) {
+                            nationality = '<span>Nepal</span>';
+                        }else if (data[i].MyReservation.Nationality == 121) {
+                            nationality = '<span>Netherlands</span>';
+                        }else if (data[i].MyReservation.Nationality == 122) {
+                            nationality = '<span>New Zealand</span>';
+                        }else if (data[i].MyReservation.Nationality == 123) {
+                            nationality = '<span>Nicaragua</span>';
+                        }else if (data[i].MyReservation.Nationality == 124) {
+                            nationality = '<span>Niger</span>';
+                        }else if (data[i].MyReservation.Nationality == 125) {
+                            nationality = '<span>Nigeria</span>';
+                        }else if (data[i].MyReservation.Nationality == 126) {
+                            nationality = '<span>North Korea</span>';
+                        }else if (data[i].MyReservation.Nationality == 127) {
+                            nationality = '<span>North Macedonia</span>';
+                        }else if (data[i].MyReservation.Nationality == 128) {
+                            nationality = '<span>Norway</span>';
+                        }else if (data[i].MyReservation.Nationality == 129) {
+                            nationality = '<span>Oman</span>';
+                        }else if (data[i].MyReservation.Nationality == 130) {
+                            nationality = '<span>Pakistan</span>';
+                        }else if (data[i].MyReservation.Nationality == 131) {
+                            nationality = '<span>Palau</span>';
+                        }else if (data[i].MyReservation.Nationality == 132) {
+                            nationality = '<span>Panama</span>';
+                        }else if (data[i].MyReservation.Nationality == 133) {
+                            nationality = '<span>Palestine State</span>';
+                        }else if (data[i].MyReservation.Nationality == 134) {
+                            nationality = '<span>Papua New Guinea</span>';
+                        }else if (data[i].MyReservation.Nationality == 135) {
+                            nationality = '<span>Paraguay</span>';
+                        }else if (data[i].MyReservation.Nationality == 136) {
+                            nationality = '<span>Peru</span>';
+                        }else if (data[i].MyReservation.Nationality == 137) {
+                            nationality = '<span>Philippines</span>';
+                        }else if (data[i].MyReservation.Nationality == 138) {
+                            nationality = '<span>Poland</span>';
+                        }else if (data[i].MyReservation.Nationality == 139) {
+                            nationality = '<span>Portugal</span>';
+                        }else if (data[i].MyReservation.Nationality == 140) {
+                            nationality = '<span>Qatar</span>';
+                        }else if (data[i].MyReservation.Nationality == 141) {
+                            nationality = '<span>Romania</span>';
+                        }else if (data[i].MyReservation.Nationality == 142) {
+                            nationality = '<span>Russia</span>';
+                        }else if (data[i].MyReservation.Nationality == 143) {
+                            nationality = '<span>Rwanda</span>';
+                        }else if (data[i].MyReservation.Nationality == 144) {
+                            nationality = '<span>Saint Kitts and Nevis</span>';
+                        }else if (data[i].MyReservation.Nationality == 145) {
+                            nationality = '<span>Saint Lucia</span>';
+                        }else if (data[i].MyReservation.Nationality == 146) {
+                            nationality = '<span>Saint Vincent and the Grenadines</span>';
+                        }else if (data[i].MyReservation.Nationality == 147) {
+                            nationality = '<span>Samoa</span>';
+                        }else if (data[i].MyReservation.Nationality == 148) {
+                            nationality = '<span>San Marino</span>';
+                        }else if (data[i].MyReservation.Nationality == 149) {
+                            nationality = '<span>Sao Tome and Principe</span>';
+                        }else if (data[i].MyReservation.Nationality == 150) {
+                            nationality = '<span>Saudi Arabia</span>';
+                        }else if (data[i].MyReservation.Nationality == 151) {
+                            nationality = '<span>Senegal</span>';
+                        }else if (data[i].MyReservation.Nationality == 152) {
+                            nationality = '<span>Serbia</span>';
+                        }else if (data[i].MyReservation.Nationality == 153) {
+                            nationality = '<span>Seychelles</span>';
+                        }else if (data[i].MyReservation.Nationality == 154) {
+                            nationality = '<span>Sierra Leone</span>';
+                        }else if (data[i].MyReservation.Nationality == 155) {
+                            nationality = '<span>Singapore</span>';
+                        }else if (data[i].MyReservation.Nationality == 156) {
+                            nationality = '<span>Slovakia</span>';
+                        }else if (data[i].MyReservation.Nationality == 157) {
+                            nationality = '<span>Slovenia</span>';
+                        }else if (data[i].MyReservation.Nationality == 158) {
+                            nationality = '<span>Solomon Islands</span>';
+                        }else if (data[i].MyReservation.Nationality == 159) {
+                            nationality = '<span>Somalia</span>';
+                        }else if (data[i].MyReservation.Nationality == 160) {
+                            nationality = '<span>South Africa</span>';
+                        }else if (data[i].MyReservation.Nationality == 161) {
+                            nationality = '<span>South Korea</span>';
+                        }else if (data[i].MyReservation.Nationality == 162) {
+                            nationality = '<span>South Sudan</span>';
+                        }else if (data[i].MyReservation.Nationality == 163) {
+                            nationality = '<span>Spain</span>';
+                        }else if (data[i].MyReservation.Nationality == 164) {
+                            nationality = '<span>Sri Lanka</span>';
+                        }else if (data[i].MyReservation.Nationality == 165) {
+                            nationality = '<span>Sudan</span>';
+                        }else if (data[i].MyReservation.Nationality == 166) {
+                            nationality = '<span>Suriname</span>';
+                        }else if (data[i].MyReservation.Nationality == 167) {
+                            nationality = '<span>Sweden</span>';
+                        }else if (data[i].MyReservation.Nationality == 168) {
+                            nationality = '<span>Switzerland</span>';
+                        }else if (data[i].MyReservation.Nationality == 169) {
+                            nationality = '<span>Syria</span>';
+                        }else if (data[i].MyReservation.Nationality == 170) {
+                            nationality = '<span>Tajikistan</span>';
+                        }else if (data[i].MyReservation.Nationality == 171) {
+                            nationality = '<span>Tanzania</span>';
+                        }else if (data[i].MyReservation.Nationality == 172) {
+                            nationality = '<span>Thailand</span>';
+                        }else if (data[i].MyReservation.Nationality == 173) {
+                            nationality = '<span>Timor-Leste</span>';
+                        }else if (data[i].MyReservation.Nationality == 174) {
+                            nationality = '<span>Togo</span>';
+                        }else if (data[i].MyReservation.Nationality == 175) {
+                            nationality = '<span>Tonga</span>';
+                        }else if (data[i].MyReservation.Nationality == 176) {
+                            nationality = '<span>Trinidad and Tobago</span>';
+                        }else if (data[i].MyReservation.Nationality == 177) {
+                            nationality = '<span>Tunisia</span>';
+                        }else if (data[i].MyReservation.Nationality == 178) {
+                            nationality = '<span>Turkey</span>';
+                        }else if (data[i].MyReservation.Nationality == 179) {
+                            nationality = '<span>Turkmenistan</span>';
+                        }else if (data[i].MyReservation.Nationality == 180) {
+                            nationality = '<span>Tuvalu</span>';
+                        }else if (data[i].MyReservation.Nationality == 181) {
+                            nationality = '<span>Uganda</span>';
+                        }else if (data[i].MyReservation.Nationality == 182) {
+                            nationality = '<span>Ukraine</span>';
+                        }else if (data[i].MyReservation.Nationality == 183) {
+                            nationality = '<span>United Arab Emirates</span>';
+                        }else if (data[i].MyReservation.Nationality == 184) {
+                            nationality = '<span>United Kingdom</span>';
+                        }else if (data[i].MyReservation.Nationality == 185) {
+                            nationality = '<span>United States of America</span>';
+                        }else if (data[i].MyReservation.Nationality == 186) {
+                            nationality = '<span>Uruguay</span>';
+                        }else if (data[i].MyReservation.Nationality == 187) {
+                            nationality = '<span>Uzbekistan</span>';
+                        }else if (data[i].MyReservation.Nationality == 188) {
+                            nationality = '<span>Vanuatu</span>';
+                        }else if (data[i].MyReservation.Nationality == 189) {
+                            nationality = '<span>Venezuela</span>';
+                        }else if (data[i].MyReservation.Nationality == 190) {
+                            nationality = '<span>Vietnam</span>';
+                        }else if (data[i].MyReservation.Nationality == 191) {
+                            nationality = '<span>Venezuela</span>';
+                        }else if (data[i].MyReservation.Nationality == 192) {
+                            nationality = '<span>Yemen</span>';
+                        }else if (data[i].MyReservation.Nationality == 193) {
+                            nationality = '<span>Zambia</span>';
+                        }
+                        else if (data[i].MyReservation.Nationality == 194) {
+                            nationality = '<span>Zimbabwe</span>';
+                        }
+                        var status = '';
+                        if (data[i].MyReservation.Status == 0) {
+                            status = '<span>Pending</span>';
+                        }
+                        else if (data[i].MyReservation.Status == 1) {
+                            status = '<span>Booked</span>';
+                        }
+                        else if (data[i].MyReservation.Status == 2) {
+                            status = '<span>Complete</span>';
+                        }
+                        else {
+                            status = '<span>Reject</span>';
+                        }
+                        html += '<div class="col-md-12">';
+                        html += '<div class="primary-contact">';
+                        html += '<i class="fa-regular fa-user"></i>';
+                        html += '<h2 class="title">Passenger ' + (i + 1) + ' Information</h2>';
+                        html += '</div>';
+                        html += '<div class="booking-details-wrap">';
+                        html += '<div class="row">';
+                        html += '<div class="col-md-4">';
+                        html += '<b>FirstName :</b>' + data[i].MyReservation.FirstName + '<br/>';
+                        html += '<b>LastName :</b>' + data[i].MyReservation.LastName + '<br/>';
+                        html += '<b>Email :</b>' + data[i].MyReservation.Email + '<br/>';
+                        html += '<b>CNIC :</b>' + data[i].MyReservation.CNIC + '<br/>';
+                        html += '<b>Nationality :</b>' + nationality + '<br/>';
+                        html += '<b>PassportNo :</b>' + data[i].MyReservation.PassportNo + '<br/>';
+                        html += '<b>Cabin :</b>' + data[i].MyCabin.Name + '<br/>';
+                        html += '<b>SeatNo :</b>' + data[i].MyReservation.SeatNo;
+                        html += '</div>';
+                        html += '<div class="col-md-4">';
+                        html += '<b>Phone :</b>' + data[i].MyReservation.Phoneno + '<br/>';
+                        html += '<b>Flight Schedule :-</b>' + '<br/>';
+                        html += '<b>Airline :</b>' + data[i].MyAirLine.Name + '<br/>';
+                        html += '<b>Route :</b>' + data[i].Cityfrom.CityName + '(' + data[i].Countryfrom.CountryName + ')-- To --' + data[i].Cityto.CityName + '(' + data[i].Countryto.CountryName + ')' + '<br/>';
+                        html += '<b>Departure Date :</b>' + depDate + '<br/>';
+                        html += '<b>Departure Time :</b>' + deptime + '<br/>';
+                        html += '<b>Arrival Time :</b>' + arrtime + '<br/>';
+                        html += '</div>';
+                        html += '<div class="col-md-4">';
+                        html += '<b>ReservationCode :</b>' + data[i].MyReservation.ReservationCode + '<br/>';
+                        html += '<b>Status :</b>' + status;
+                        html += '</div>';
+                        html += '</div>';
+                        
+                        html += '</div>';
+                    }
+                    $('#mydata').html(html);
+                },
+                error: function (data) {
+                    debugger;
+                    iziToast.error({
+                        title: 'Error',
+                        position: 'center',
+                        message: 'Illegal operation',
+                    });
+                }
+            });
+        }
+    }
+</script>
+
+

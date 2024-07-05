@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/MyAdminMaster.cshtml";
+    int Sno = 0;
+    string status = string.Empty;
+}
+
+<div class="card-body">
+    <h2>Passenger List</h2>
+    <div class="table-responsive">
+        <table class="table data-table table-striped table-hover data-table js-exportable product_item_list c_table theme-color mb-0 footable footable-1 footable-paging footable-paging-center breakpoint-lg" style="">
+            <thead>
+                <tr class="footable-header">
+                    <th class="footable-sortable footable-first-visible" style="display: table-cell;">Sno:<span class="fooicon fooicon-sort"></span></th>
+                    <th class="footable-sortable" style="display: table-cell;">First Name<span class="fooicon fooicon-sort"></span></th>
+                    <th class="footable-sortable" style="display: table-cell;">Last Name<span class="fooicon fooicon-sort"></span></th>
+                    <th class="footable-sortable" style="display: table-cell;">Email<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">CNIC<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Phoneno<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Passport<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Nationality<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Cabin<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Flight Schedule<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Flight DepartureDate<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Flight DepartureTime<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs" class="footable-sortable" style="display: table-cell;">Flight Arrival Time<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">Seat No<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="xs" class="footable-sortable" style="display: table-cell;">Reservation Code<span class="fooicon fooicon-sort"></span></th><th data-breakpoints="sm xs md" class="footable-sortable footable-last-visible" style="display: table-cell;">Status<span class="fooicon fooicon-sort"></span></th>
+                    <th data-breakpoints="sm xs md" class="footable-sortable footable-last-visible" style="display: table-cell;">Action<span class="fooicon fooicon-sort"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.res)
+                {
+                <tr>
+                    <td>
+                        @{ Sno++;}
+                        @Sno
+                    </td>
+                    <td>@item.MyReservation.FirstName</td>
+                    <td>@item.MyReservation.LastName</td>
+                    <td>@item.MyReservation.Email</td>
+                    <td>@item.MyReservation.CNIC</td>
+                    <td>@item.MyReservation.Phoneno</td>
+                    <td>@item.MyReservation.PassportNo</td>
+                    <td>@item.MyReservation.Nationality</td>
+                    <td>@item.MyCabin.Name</td>
+                    <td class="col-md-12">@item.Cityfrom.CityName (@item.Countryfrom.CountryName) To @item.Cityto.CityName (@item.Countryto.CountryName)</td>
+                    <td>@Convert.ToDateTime(item.MySchedule.DepartureDate).ToString("ddd dd MMM, yyyy")</td>
+                    <td>@Convert.ToDateTime(item.MySchedule.DepartureTime).ToString("h:mm tt")</td>
+                    <td>@Convert.ToDateTime(item.MySchedule.ArrivalTime).ToString("h:mm tt")</td>
+                    <td><h5>@item.MyReservation.SeatNo</h5></td>
+                    <td><h5>@item.MyReservation.ReservationCode</h5></td>
+                    <td>
+                        @if (item.MyReservation.Status == 0)
+                        {
+                            <h5><span class="col-green">In-Process</span></h5>
+
+                        }
+                        else if (item.MyReservation.Status == 1)
+                        {
+                            <h5><span class="col-green">Booked</span></h5>
+                        }
+                        else if (item.MyReservation.Status == 2)
+                        {
+                            <h5><span class="col-orange">Completed</span></h5>
+                        }
+                        else
+                        {
+                            <h5><span class="col-red">Rejected</span></h5>
+                        }
+                        @status
+                    </td>
+                    <td>
+                        @Html.ActionLink("View Reservation", "ViewReservation", new { appID = item.MyReservation.ReservationID }, new { @class = "btn btn-warning" })
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

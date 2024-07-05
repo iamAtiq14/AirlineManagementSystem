@@ -1,0 +1,101 @@
+﻿@model AirlineManagementSystem.Models.AirLine
+@{
+    ViewBag.Title = "AddAirLine";
+    Layout = "~/Views/Shared/MyAdminMaster.cshtml";
+}
+
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">AirLine</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <input type="hidden" id="hdnfieldAirlineId" />
+                        <div class="form-group form-float">
+                            <label class="control-label">Name</label>
+                            <input type="text" onchange="validdate('#Name','#name','AirLine Name')" class="form-control" id="Name" placeholder="Airline Name">
+                            <span class="text-danger" id="name"></span>
+                        </div>
+                        <div class="form-group form-float">
+                            <label class="control-label">Bussiness Cabin</label>
+                            <input type="number" class="form-control" onchange="validdate('#BusinessCabin', '#msgBusinessCabin', 'BusinessCabin')" id="BusinessCabin" placeholder="Bussiness Cabin">
+                            <span class="text-danger" id="msgBusinessCabin"></span>
+                        </div>
+                        <div class="form-group form-float">
+                            <label class="control-label">Economy Cabin</label>
+                            <input type="number" class="form-control" onchange="validdate('#EconomyCabin', '#msgEconomyCabin', 'EconomyCabin')" id="EconomyCabin" placeholder="Economy Cabin">
+                            <span class="text-danger" id="msgEconomyCabin"></span>
+                        </div>
+                        <div class="form-group form-float">
+                            <label class="control-label">Status</label>
+                            <select class="form-control" onchange="validdateDropDowns('#Status', '#msgStatus', 'Status');" id="Status">
+                                <option value="-1">----Select Status----</option>
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                            <span class="text-danger" id="msgStatus"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger waves-effect col-md-12" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button class="btn btn-raised btn-primary waves-effect col-md-12" id="btnSubmit" onclick="SubmitData();">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2>AirLine Details</h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <button type="button" class="btn btn-raised btn-primary waves-effect" data-toggle="modal" data-target="#Modal">
+                        Add AirLine
+                    </button>
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Sno:</th>
+                                <th>Name</th>
+                                <th>Bussiness Cabin</th>
+                                <th>Economy Cabin</th>
+                                <th>Total Cabin</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mytable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<link href="~/AMSJS/iziToast.css" rel="stylesheet" />
+<script src="~/AMSJS/iziToast.js"></script>
+<script type="text/javascript" src="~/AMSJS/AirLine.js"></script>

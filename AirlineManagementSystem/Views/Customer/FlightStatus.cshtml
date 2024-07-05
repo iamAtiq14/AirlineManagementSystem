@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "FlightStatus";
+    Layout = "~/Views/Shared/MyTravelMaster.cshtml";
+    string status = "";
+}
+<section class="breadcrumb-area breadcrumb-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="title">Flight Status</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    @foreach (var item in ViewBag.Schedule)
+    {
+        <div class="col-md-3">
+            <div class="flight-offer-item offer-item-two">
+
+                <div class="flight-offer-thumb">
+                    <img src="~/CustomerAssets/img/images/offer_img02.jpg" alt="">
+                </div>
+
+                <div class="flight-offer-content">
+                    <h2 class="title">@item.MyAirLine.Name</h2>
+                    <p>--------------------</p>
+                    <h2 class="title">@item.Cityfrom.CityName (@item.Countryfrom.CountryName) To @item.Cityto.CityName (@item.Countryto.CountryName)</h2>
+                    <span>Departure Date</span>
+                    <span>@Convert.ToDateTime(item.MySchedule.DepartureDate).ToString("ddd dd MMM, yyyy")</span>
+
+                    <p>--------------------</p>
+                    <span>Departure Time</span>
+                    <span>@Convert.ToDateTime(item.MySchedule.DepartureTime).ToString("ddd h:mm tt")</span>
+
+                    <p>--------------------</p>
+                    <span>Arrival Time</span>
+                    <span>@Convert.ToDateTime(item.MySchedule.ArrivalTime).ToString("ddd h:mm tt")</span>
+
+                    <p>--------------------</p>
+                    <h4 class="title">AirPort</h4>
+                    <span>@item.Airportfrom.AirportName  To @item.Airportto.AirportName</span>
+                    <p>--------------------</p>
+                    <h4 class="title">Status</h4>
+                    @if (item.MySchedule.Status == 0)
+                    {
+                        status = "InActive";
+                    }
+                    else
+                    {
+                        status = "Active";
+                    }
+                    @status
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

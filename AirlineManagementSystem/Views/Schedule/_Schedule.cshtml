@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AirlineManagementSystem.Models.Schedule>
+@{
+    int Sno = 0;
+    string status = "";
+}
+<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+    <thead>
+        <tr>
+            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Sno:</th>
+
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Airline</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Route</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Airport</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Departure Date</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Departure Time</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Arrival Time</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Status</th>
+            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="mytable">
+        @foreach (var item in ViewBag.Schedule)
+        {
+            <tr>
+                <td>
+                    @{ Sno++;}
+                    @Sno
+                </td>
+                <td>@item.MyAirLine.Name</td>
+                <td class="col-md-12">@item.Cityfrom.CityName (@item.Countryfrom.CountryName) To @item.Cityto.CityName (@item.Countryto.CountryName)</td>
+                <td class="col-md-12">@item.Airportfrom.AirportName  To @item.Airportto.AirportName</td>
+                <td>@Convert.ToDateTime(item.MySchedule.DepartureDate).ToString("ddd dd MMM, yyyy")</td>
+                <td>@Convert.ToDateTime(item.MySchedule.DepartureTime).ToString("h:mm tt")</td>
+                <td>@Convert.ToDateTime(item.MySchedule.ArrivalTime).ToString("h:mm tt")</td>
+                <td>
+                    @if (item.MySchedule.Status == 0)
+                    {
+                        status = "InActive";
+                    }
+                    else
+                    {
+                        status = "Active";
+                    }
+                    @status
+                </td>
+                <td>
+                    @*@Html.ActionLink(" ", "AddDoctorSchedule", new { DsId = item.MySchedule.ScheduleId },
+                        new { @class = "ri-pencil-line mr-0 badge bg-success mr-2" })*@
+
+                    <button type="button" class="btn btn-primary" onclick="Edit(@item.MySchedule.FlightScheduleID);">Edit</button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

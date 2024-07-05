@@ -1,0 +1,131 @@
+﻿@model AirlineManagementSystem.Models.AirLineRoute
+@{
+    ViewBag.Title = "AddRoute";
+    Layout = "~/Views/Shared/MyAdminMaster.cshtml";
+}
+
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">Route</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input type="hidden" id="hdnfieldroute" class="form-control" />
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Country From</label>
+                            <div class="form-group form-float" 
+                                 onchange="validdateDropDowns('#ddlcountry', '#msgcouf', 'Country From')" id="ddlcountry"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Country To</label>
+                            <div class="form-group form-float" onchange="validdateDropDowns('#ddlcountryto', '#msgctt', 'Country To')" 
+                                 id="ddlcountryto"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">City From</label>
+                            <div class="form-group form-float" onchange="validdateDropDowns1('#ddlcf', '#msgcf', 'City From')" id="ddlcf"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">City To</label>
+                            <div class="form-group form-float" onchange="validdateDropDowns1('#ddlct', '#msgct', 'City To')" id="ddlct"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Airport From</label>
+                            <div class="form-group form-float" onchange="validdateDropDowns('#ddlaf', '#msgaf', 'Airport From')" id="ddlaf"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Airport To</label>
+                            <div class="form-group form-float" onchange="validdateDropDowns('#ddlato', '#msgat', 'Airport To')" id="ddlato"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group form-float">
+                            <label class="control-label">Status</label>
+                            <select id="Status" onchange="validdateDropDowns('#Status', '#msgstatus', 'Status')" class="form-control">
+                                <option value="-1">-----Select Status-----</option>
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                            <span class="text-danger" id="msgstatus"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger waves-effect col-md-12" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button class="btn btn-raised btn-primary waves-effect col-md-12" id="btnSubmit" onclick="SubmitData();">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2>Route Details</h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <button type="button" class="btn btn-raised btn-primary waves-effect" data-toggle="modal" data-target="#Modal">
+                        Add Route
+                    </button>
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Sno:</th>
+                                <th>Country From</th>
+                                <th>Country to</th>
+                                <th>City From</th>
+                                <th>City To</th>
+                                <th>Airport From</th>
+                                <th>Airport To</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mytable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<link href="~/AMSJS/iziToast.css" rel="stylesheet" />
+<script src="~/AMSJS/iziToast.js"></script>
+<script type="text/javascript" src="~/AMSJS/Route.js"></script>
+
+
+
+
+
+

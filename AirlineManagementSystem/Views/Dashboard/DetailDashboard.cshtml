@@ -1,0 +1,497 @@
+﻿@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/MyAdminMaster.cshtml";
+    int Sno = 0;
+    int Sno2 = 0;
+    int Sno3 = 0;
+    int Sno4 = 0;
+    int Sno5 = 0;
+    int Sno6 = 0;
+    string status = "";
+    string status1 = "";
+    string status2 = "";
+    string status3 = "";
+    string status4 = "";
+    string status5 = "";
+}
+
+<h3 class="text-center">DashBoard of Airline Management System (AMS)</h3>
+<hr />
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">AirLine</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Sno:</th>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.airline1)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{ Sno++;}
+                                                        @Sno
+                                                    </td>
+                                                    <td>
+                                                        @item.Name
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Status == 0)
+                                                        {
+                                                            status = "InActive";
+                                                        }
+                                                        else
+                                                        {
+                                                            status = "Active";
+                                                        }
+                                                        @status
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">AirPort</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="body">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <table class="table table-bordered table-striped table-hover dataTable js-exportable ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sno:</th>
+                                                    <th>AirPort Name</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in ViewBag.airport1)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        @{ Sno2++;}
+                                                        @Sno2
+                                                    </td>
+                                                    <td>
+                                                        @item.AirportName
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Status == 0)
+                                                        {
+                                                            status1 = "InActive";
+                                                        }
+                                                        else
+                                                        {
+                                                            status1 = "Active";
+                                                        }
+                                                        @status1
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cabin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Sno:</th>
+                                                <th>Cabin Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.cabin1)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{ Sno3++;}
+                                                        @Sno3
+                                                    </td>
+                                                    <td>
+                                                        @item.Name
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Status == 0)
+                                                        {
+                                                            status2 = "InActive";
+                                                        }
+                                                        else
+                                                        {
+                                                            status2 = "Active";
+                                                        }
+                                                        @status2
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">City</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable ">
+                                        <thead>
+                                            <tr>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Sno:</th>
+
+                                                <th>City Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.city1)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{ Sno4++;}
+                                                        @Sno4
+                                                    </td>
+                                                    <td>
+                                                        @item.CityName
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Status == 0)
+                                                        {
+                                                            status3 = "InActive";
+                                                        }
+                                                        else
+                                                        {
+                                                            status3 = "Active";
+                                                        }
+                                                        @status3
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Country</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Sno:</th>
+                                                <th>Country Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.country1)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{ Sno5++;}
+                                                        @Sno5
+                                                    </td>
+                                                    <td>
+                                                        @item.CountryName
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Status == 0)
+                                                        {
+                                                            status4 = "InActive";
+                                                        }
+                                                        else
+                                                        {
+                                                            status4 = "Active";
+                                                        }
+                                                        @status4
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Province</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable ">
+                                        <thead>
+                                            <tr>
+                                                <th>Sno:</th>
+                                                <th>Country Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.province1)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @{ Sno6++;}
+                                                        @Sno6
+                                                    </td>
+                                                    <td>
+                                                        @item.ProvinceName
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Status == 0)
+                                                        {
+                                                            status5 = "InActive";
+                                                        }
+                                                        else
+                                                        {
+                                                            status5 = "Active";
+                                                        }
+                                                        @status5
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row clearfix">
+
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.airline " data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly />
+                        <p>AirLine</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal2">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.airport" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#ee2558" readonly />
+                        <p>AirPort</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal3">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.cabin" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly>
+                        <p>Cabin</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal4">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.city" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#ee2558" readonly>
+                        <p>City</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal5">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.country" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly>
+                        <p>Country</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal6">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.province" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly>
+                        <p>Province</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal7">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.reservation" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly>
+                        <p>Reservation</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal9">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.route" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly>
+                        <p>Route</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-center">
+            <div class="card">
+                <a style="border:hidden" data-toggle="modal" data-target="#Modal10">
+                    <div class="body">
+                        <input type="text" class="knob" value="@ViewBag.schedule" data-linecap="round" data-width="100" data-height="100" data-thickness="0.08" data-fgColor="#00adef" readonly>
+                        <p>Schedule</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

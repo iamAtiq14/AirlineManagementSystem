@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/MyTravelMaster.cshtml";
+}
+
+<section class="breadcrumb-area breadcrumb-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="title">About Us</h2>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb-area-end -->
+<!-- about-area -->
+<section class="about-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 order-0 order-lg-2">
+                <div class="about-img">
+                    <img src="~/CustomerAssets/img/images/about_img01.jpg" alt="img">
+                    <img src="~/CustomerAssets/img/images/about_img02.jpg" alt="img" class="img-two">
+                </div>
+                <div class="about-img">
+                    <img src="~/CustomerAssets/img/images/about_img01.jpg" alt="img">
+                    <img src="~/CustomerAssets/img/images/about_img02.jpg" alt="img" class="img-two">
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="about-content">
+                    <div class="section-title">
+                        <span class="sub-title">who we are</span>
+                        <h2 class="title">Airline Managent System</h2>
+                    </div>
+                    <p>
+                        An Airline Management System is a managerial software which targets to control all operations of an airline. Airlines provide transport services for their passengers. They carry or hire aircraft for this purpose. All operations of an airline company are controlled by their airline management system.
+
+                        This system involves the scheduling of flights, air ticket reservations, flight cancellations, customer support, and staff management. Daily flights updates can also be retrieved by using the system.
+                    </p>
+                    <ul>
+                        We will focus on the following set of requirements while designing the Airline Management System:
+                        <li><i class="flaticon-tick-1"></i>Customers should be able to search for flights for a given date and source/destination airport.</li>
+                        <li><i class="flaticon-tick-1"></i>Customers should be able to reserve a ticket for any scheduled flight. Customers can also build a multi-flight itinerary.</li>
+                        <li><i class="flaticon-tick-1"></i>Users of the system can check flight schedules, their departure time, available seats, arrival time, and other flight details.</li>
+                        <li><i class="flaticon-tick-1"></i>Customers can make reservations for multiple passengers under one itinerary.</li>
+                        <li><i class="flaticon-tick-1"></i>Only the admin of the system can add new aircrafts, flights, and flight schedules. Admin can cancel any pre-scheduled flight (all stakeholders will be notified).</li>
+                        <li><i class="flaticon-tick-1"></i>Customers can cancel their reservation and itinerary.</li>
+                        <li><i class="flaticon-tick-1"></i>The system should be able to handle the assignment of pilots and crew members to flights.</li>
+                        <li><i class="flaticon-tick-1"></i>The system should be able to handle payments for reservations.</li>
+                        <li><i class="flaticon-tick-1"></i>The system should be able to send notifications to customers whenever a reservation is made/modified or there is an update for their flights.</li>
+
+                        
+                        
+                        
+                        
+                        
+                        
+                    </ul>
+                    <a href="@Url.Action("Contact","Customer")" class="btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-area-end -->

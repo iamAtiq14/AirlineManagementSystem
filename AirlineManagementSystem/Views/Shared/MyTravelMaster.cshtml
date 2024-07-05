@@ -1,0 +1,230 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from flightheart.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Feb 2023 17:05:29 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>FlightHeart - Air Ticket Booking Service</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/CustomerAssets/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="~/CustomerAssets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/animate.min.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/odometer.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/flaticon.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/slick.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/default.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/style.css">
+    <link rel="stylesheet" href="~/CustomerAssets/css/responsive.css">
+</head>
+<body>
+
+    <!-- preloader -->
+    <div id="preloader">
+        <div id="loading-center">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader-end -->
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+    <!-- header-area -->
+    <header>
+        <div class="header-top">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="header-top-left">
+                            <a href="#"><i class="fa-solid fa-plane"></i> COVID-19 update & travel requirements</a>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="header-top-right">
+                            <ul>
+                                <li><a href="#">Enjoy your Journey with keep smiling</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sticky-header" class="menu-area transparent-header">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                        <div class="menu-wrap">
+                            <nav class="menu-nav">
+                                <div class="logo"><a href="#"><img src="~/CustomerAssets/img/logo/logo.png" alt=""></a></div>
+                                <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                    <ul class="navigation">
+                                        <li class="active"><a href="../Customer/Customer">Home</a></li>
+                                        <li><a href="@Url.Action("About","Customer")">About</a></li>
+                                        <li class="menu-item-has-children">
+                                            <a href="#">Pages</a>
+                                            <ul class="submenu">
+                                                <li><a href="@Url.Action("BookingList","Customer")">Booking List</a></li>
+                                                <li><a href="@Url.Action("Index","Reservation")">Booking Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="@Url.Action("Contact","Customer")">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="header-action d-none d-md-block">
+                                    <ul>
+                                        <li class="question"><a href="@Url.Action("Contact","Customer")">?</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <!-- Mobile Menu  -->
+                        <div class="mobile-menu">
+                            <nav class="menu-box">
+                                <div class="close-btn"><i class="fa-solid fa-xmark"></i></div>
+                                <div class="nav-logo">
+                                    <a href="#"><img src="~/CustomerAssets/img/logo/logo_02.png" alt="" title=""></a>
+                                </div>
+                                <div class="menu-outer">
+                                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                </div>
+                                <div class="social-links">
+                                    <ul class="clearfix">
+                                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="menu-backdrop"></div>
+                        <!-- End Mobile Menu -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-area-end -->
+    <!-- main-area -->
+    <section class="content">
+        @RenderBody()
+    </section>
+    <!-- main-area-end -->
+    <!-- footer-area -->
+    <footer>
+        <div class="footer-area footer-bg">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="footer-widget">
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="~/CustomerAssets/img/logo/logo.png" alt=""></a>
+                                </div>
+                                <div class="footer-content">
+                                    <p>Online to make your journey even more memorable access or meet</p>
+                                    <ul class="footer-social">
+                                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-sm-4">
+                            <div class="footer-widget privacy">
+                                <div class="fw-title">
+                                    <h4 class="title">Privacy</h4>
+                                </div>
+                                <div class="fw-link">
+                                    <ul>
+                                        <li><a href="@Url.Action("About","Customer")">About Us</a></li>
+                                        <li><a href="@Url.Action("BookingList","Customer")">Booking List</a></li>
+                                        <li><a href="@Url.Action("Index","Reservation")">Booking Details</a></li>
+                                        <li><a href="@Url.Action("Contact","Customer")">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-4">
+                            <div class="footer-widget privacy">
+                                <div class="fw-title">
+                                    <h4 class="title">Other Info</h4>
+                                </div>
+                                <div class="fw-link">
+                                    <ul>
+                                        <li> <a href="@Url.Action("Index","Reservation")" class="nav-link" type="button">My Trips</a></li>
+                                        <li class="nav-item" role="presentation"><a href="@Url.Action("FlightStatus","Customer")" class="nav-link" type="button">Flight status</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-8">
+                            <div class="footer-widget">
+                                <div class="fw-title">
+                                    <h4 class="title">Contacts</h4>
+                                </div>
+                                <div class="footer-contact">
+                                    <p>Degree College No1 Dera Ismail Khan</p>
+                                    <h2 class="title"><a href="tel:+1-888-888-8888">+923498264236</a></h2>
+                                    <h2 class="title"><a href="tel:+1-888-888-8888">+923145156620</a></h2>
+                                    <a href="#">kiramatullahcomputer@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="copyright-text">
+                                <p>Developed by kiramat,Mohsin and Seikh Abdullah <span>FlightHeart</span></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="cart-img text-end">
+                                <img src="~/CustomerAssets/img/images/cart.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-area-end -->
+    <!-- JS here -->
+    <script src="~/CustomerAssets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="~/CustomerAssets/js/bootstrap.min.js"></script>
+    <script src="~/CustomerAssets/js/isotope.pkgd.min.js"></script>
+    <script src="~/CustomerAssets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/CustomerAssets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/CustomerAssets/js/jquery.odometer.min.js"></script>
+    <script src="~/CustomerAssets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/CustomerAssets/js/jquery.appear.js"></script>
+    <script src="~/CustomerAssets/js/slick.min.js"></script>
+    <script src="~/CustomerAssets/js/jquery-ui.min.js"></script>
+    <script src="~/CustomerAssets/js/wow.min.js"></script>
+    <script src="~/CustomerAssets/js/main.js"></script>
+</body>
+
+<!-- Mirrored from flightheart.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Feb 2023 17:06:03 GMT -->
+</html>

@@ -1,0 +1,130 @@
+﻿@model AirlineManagementSystem.Models.AirPort
+@{
+    ViewBag.Title = "AddAirPort";
+    Layout = "~/Views/Shared/MyAdminMaster.cshtml";
+}
+
+<div class="modal fade" id="Modal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel"> Welcome!!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            Please Carefully Choose Your City because the City Selection Box is not dependent on Airport Box.
+                            For Example If you Enter Jada Airport and then Select Another City means pakistan(Dera Ismail Khan , Peshawer etc) and then Submit
+                            your Form so your Inserted data is not true. Therefore focus on carefully Insertion.
+                            Thanks
+                        </p>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger waves-effect col-md-12" data-toggle="modal" data-target="#Modal" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">AirPort</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-blue"><span class="blink">Please carefully choose City</span><label data-toggle="modal" data-target="#Modal1" data-dismiss="modal">Learn More</label></p>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="hidden" id="hdnfieldairport" class="form-control" />
+                        <div class="form-group form-float">
+                            <label>AirPort Name</label>
+                            <input type="text" onchange="validdate('#Name','#name','AirPort Name')" class="form-control" id="Name" placeholder="AirPort Name">
+                            <span class="text-danger" id="name"></span>
+                        </div>
+                        @*<div class="form-group form-float">
+                <label>City Name</label>
+                @Html.DropDownListFor(x => x.CityID, new SelectList(ViewBag.City, "CityId", "CityName"),
+               new { @class = "form-control", onchange = "validdateDropDowns('#CityId','#msgcity','City Name')" })
+                <span class="text-danger" id="msgcity"></span>
+            </div>*@
+                        <label class="control-label">City</label>
+                        <div class="form-group form-float" onchange="validdateDropDowns('#ddlcity', '#msgCity', 'City Name')" id="ddlcity"></div>
+                        <div class="form-group form-float">
+                            <label>Status</label>
+                            <select class="form-control" onchange="validdateDropDowns('#Status', '#msgStatus', 'Status');" id="Status">
+                                <option value="-1">----Select Status----</option>
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+
+                            <span class="text-danger" id="msgStatus"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger waves-effect col-md-12" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button class="btn btn-raised btn-primary waves-effect col-md-12" id="btnSubmit" onclick="SubmitData();">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2>AirPort Details</h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <button type="button" class="btn btn-raised btn-primary waves-effect" data-toggle="modal" data-target="#Modal">
+                        Add AirPort
+                    </button>
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Sno:</th>
+                                <th>AirPort Name</th>
+                                <th>City Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mytable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<link href="~/AMSJS/iziToast.css" rel="stylesheet" />
+<script src="~/AMSJS/iziToast.js"></script>
+<script type="text/javascript" src="~/AMSJS/Airport.js"></script>
+
